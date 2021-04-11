@@ -13,7 +13,7 @@ function getCart($email) {
         url: Url + 'GetCart',
         type: 'get',
         dataType: 'json',
-        data: {"email":$email},
+        data: { "email": $email },
         contentType: 'text/plain',
         success: function (data) {
 
@@ -52,12 +52,33 @@ function getCart($email) {
 function deleteItem($id) {
 
     //TODO complete implementation using the product id
-    alert("cart.js/deleteItem() is not implemented")
+
+    // Delete Item
+    $.ajax({
+        url: Url + 'Cart/' + `${$id}`,
+        type: 'DELETE',
+        contentType: 'json',
+
+        success: function (data) {
+            alert("Item removed from cart");
+        }
+    });
 }
 
 function checkOut() {
 
     //TODO complete implementation
-    alert("cart.js/checkOut() is not implemented")
 
+    //Check out
+    $.ajax({
+        url: Url+'Cart',
+        type: 'PUT',
+        dataType: 'json',
+        data: JSON.stringify({ 'email': email }),
+        contentType: 'json',
+
+        success: function (data) {
+            alert("Check out successful! Thanks for shopping!");
+        }
+    });
 }
